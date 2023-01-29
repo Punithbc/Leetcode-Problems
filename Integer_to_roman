@@ -1,0 +1,23 @@
+  class Solution:
+    def romanToInt(self, s: str) -> int:
+        dic={'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+        lst=[]
+        count=0
+        for i in s:
+            if count>0:
+                if i in ('V', 'X') and (s[count-1]) == 'I':
+                    lst[-1]=0
+                    lst.append(dic[i]-1)
+                elif i in ('L','C') and (s[count-1])== 'X':
+                    lst[-1]=0
+                    lst.append(dic[i]-10)
+                elif i  in ('D','M') and (s[count-1]) == 'C':
+                    lst[-1]=0
+                    lst.append(dic[i]-100)
+                else:
+                    lst.append(dic[i]) 
+            else:                                                                
+                lst.append(dic[i])
+            count+=1 
+        print(lst)     
+        return sum(lst)    
